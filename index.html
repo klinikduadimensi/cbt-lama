@@ -1,938 +1,760 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <base target="_top">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>CBT DUA DIMENSI</title>
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/d/196-yYlDwDc-tUVDTslzPAlBWTmf4ZbWg">
-    <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/196-yYlDwDc-tUVDTslzPAlBWTmf4ZbWg">
-    
-    <style>
-:root { 
-    --primary: #0e58a6; 
-    --primary-dark: #0b4685; 
-    --secondary: #64748b; 
-    --bg: #f8fafc; 
-    --card: #ffffff; 
-    --text: #334155; 
-    --success: #10b981; 
-    --danger: #ef4444;
-    --border: #e2e8f0;
-    --radius: 12px;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>CBT DUA DIMENSI</title>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/d/196-yYlDwDc-tUVDTslzPAlBWTmf4ZbWg">
+<style>
+:root {
+    --primary: #0e58a6; --primary-dark: #0b4685; --secondary: #64748b;
+    --bg: #f8fafc; --card: #ffffff; --text: #334155; --border: #e2e8f0;
+    --success: #10b981; --danger: #ef4444; --radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,.05), 0 2px 4px -1px rgba(0,0,0,.03);
 }
-
-/* --- DARK MODE OVERRIDES --- */
 body.dark-mode {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --text: #f1f5f9;
-    --border: #334155;
-    --secondary: #94a3b8;
+    --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --border: #334155; --secondary: #94a3b8;
 }
-body.dark-mode .opsi-item:hover, body.dark-mode .jodoh-item:hover { background: #334155; }
-body.dark-mode .opsi-item:has(input:checked) { background: #1e3a8a; border-color: #3b82f6; }
-body.dark-mode .jodoh-item.selected { background: #1e3a8a; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
-body.dark-mode .nav-btn { background: var(--card); border-color: var(--border); color: var(--secondary); }
-body.dark-mode .nav-btn:hover { border-color: #64748b; color: #f1f5f9; }
-body.dark-mode .nav-btn.active { background: #1e3a8a; border-color: #3b82f6; color: #93c5fd; }
-body.dark-mode .nav-btn.filled { background: #059669; color: white; border-color: #059669; }
-body.dark-mode .timer-display { background: #1e293b; color: #fbbf24; border-color: #334155; }
-body.dark-mode .tab-switch-warning { background: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
-body.dark-mode .rules-footer { background: var(--card); }
-body.dark-mode .upload-area:hover { background: #1e3a8a; border-color: #3b82f6; }
-body.dark-mode .rules-content { background: #0f172a; color: #cbd5e1; }
-body.dark-mode .m-timer { background: #1e293b; color: #fbbf24; border-color: #334155; }
-body.dark-mode .m-violation { background: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
-body.dark-mode .form-control { background: #0f172a; color: #f1f5f9; }
-
-/* --- FONT SIZE MODES --- */
 body.font-small { font-size: 14px; }
-body.font-small .teks-soal { font-size: 1rem; }
-body.font-small .opsi-content { font-size: 0.95rem; }
-
 body.font-medium { font-size: 16px; }
-body.font-medium .teks-soal { font-size: 1.1rem; }
-body.font-medium .opsi-content { font-size: 1.05rem; }
-
 body.font-large { font-size: 18px; }
-body.font-large .teks-soal { font-size: 1.35rem; }
-body.font-large .opsi-content { font-size: 1.25rem; }
 
-body { 
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-    background: var(--bg); 
-    color: var(--text); 
-    margin: 0; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    user-select: none; 
-    transition: background-color 0.3s ease, color 0.3s ease;
+* { box-sizing: border-box; }
+body {
+    margin: 0; height: 100vh; overflow: hidden; font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+    background: var(--bg); color: var(--text); -webkit-user-select: none; user-select: none;
+    transition: background-color .3s, color .3s;
 }
+.screen { display: none; position: fixed; inset: 0; overflow: auto; background: var(--bg); z-index: 10; }
+.screen.on { display: flex; flex-direction: column; align-items: center; }
+#ujianScreen.on { align-items: stretch; }
+.screen.overlay { background: rgba(15,23,42,.6); justify-content: center; padding: 16px; z-index: 50; }
+.screen.overlay.on { display: flex; }
 
-/* --- Layout Screens --- */
-#loginScreen, #successScreen, #transitionScreen { 
-    position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; 
-    background: linear-gradient(135deg, var(--bg) 0%, var(--border) 100%); 
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+.box { width: 100%; max-width: 420px; margin: auto; padding: 32px 26px; border-radius: 20px; }
+.wrap { width: 100%; max-width: 860px; padding: 16px; margin: 0 auto; }
+.modal { width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; }
+.center { text-align: center; }
+.right { text-align: right; }
+.muted { color: var(--secondary); }
+.small { font-size: .85rem; }
+.err { color: var(--danger); }
+.logo { display: block; width: 64px; height: 64px; margin: 0 auto 12px; border-radius: 50%; }
+.head h2 { margin: 0; color: var(--primary); font-weight: 800; font-size: 1.4rem; text-align: center; }
+.head p { margin: 4px 0 0; text-align: center; }
+.notice { background: #e7f1ff; color: #1e3a8a; border: 1px solid #93c5fd; padding: 10px; border-radius: 8px; margin: 14px 0; font-size: .9rem; }
+.foot { margin-top: 22px; text-align: center; font-size: .8rem; color: var(--secondary); }
+
+.fc { width: 100%; padding: 13px 14px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px;
+      font-size: .95rem; background: var(--bg); color: var(--text); font-family: inherit; }
+.fc:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14,88,166,.15); background: var(--card); }
+.area { min-height: 140px; resize: vertical; }
+
+.btn-block { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px;
+             font-weight: 700; font-size: 1rem; cursor: pointer; letter-spacing: .5px; }
+.btn-block:hover { background: var(--primary-dark); }
+.btn-block:disabled { background: var(--secondary); cursor: not-allowed; }
+.btn-link { display: block; width: 100%; margin-top: 12px; background: none; border: none; color: var(--primary); font-weight: 600; cursor: pointer; }
+.btn-secondary { padding: 10px 16px; background: var(--secondary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.btn-start { padding: 11px 22px; background: var(--success); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.btn-small { padding: 7px 12px; background: var(--secondary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: .85rem; }
+.btn-danger { padding: 8px 14px; background: var(--danger); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.btn-icon { width: 36px; height: 36px; background: var(--secondary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; }
+.btn-next, .btn-prev { padding: 11px 20px; border: none; border-radius: 8px; color: #fff; font-weight: 700; cursor: pointer; }
+.btn-next { background: var(--primary); }
+.btn-prev { background: var(--secondary); }
+.btn-prev:disabled, .btn-next:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Menu */
+.topbar { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 18px;
+          background: var(--card); border-bottom: 1px solid var(--border); }
+.tc { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.sesi { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.sesi-aksi { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: .8rem; font-weight: 700; background: var(--border); color: var(--text); }
+.badge.ok { background: #d1fae5; color: #065f46; }
+.badge.run { background: #e7f1ff; color: #1e3a8a; }
+.badge.bad { background: #fee2e2; color: #991b1b; }
+.opsi { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; background: var(--card); }
+.opsi input { margin-top: 4px; transform: scale(1.2); }
+
+/* Tata tertib / info */
+.info { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+.info td { padding: 8px 6px; border-bottom: 1px solid var(--border); }
+.info td:first-child { width: 110px; font-weight: 600; color: var(--secondary); }
+.rules { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; line-height: 1.6; font-size: .9rem; margin-bottom: 16px; }
+.card-head { background: var(--primary); color: #fff; margin: -20px -20px 16px; padding: 14px; border-radius: var(--radius) var(--radius) 0 0; text-align: center; font-weight: 700; }
+.row-end { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* Ujian */
+.main { flex: 1; display: flex; gap: 16px; padding: 16px; min-height: 0; }
+.soal-panel { flex: 3; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; overflow-y: auto; }
+.nav-panel { flex: 1; max-width: 300px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; overflow-y: auto; }
+.nomor { display: flex; justify-content: space-between; border-bottom: 2px solid var(--bg); padding-bottom: 10px; margin-bottom: 16px; font-weight: 700; color: var(--primary); }
+.teks { line-height: 1.7; margin-bottom: 18px; }
+.teks img { max-width: 100%; border-radius: 8px; }
+.opsi-group { display: flex; flex-direction: column; }
+.opsi-group .opsi span img { max-width: 100%; }
+.bs-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.bs-btn button { padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); color: var(--text); cursor: pointer; margin-left: 6px; font-weight: 600; }
+.bs-btn button.on-ok { background: var(--success); color: #fff; border-color: var(--success); }
+.bs-btn button.on-bad { background: var(--danger); color: #fff; border-color: var(--danger); }
+.foot-nav { margin-top: auto; display: flex; justify-content: space-between; padding-top: 22px; gap: 10px; }
+.timer { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; padding: 12px; text-align: center; border-radius: 10px; font-size: 1.4rem; font-weight: 800; margin-bottom: 14px; }
+.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 10px 0 16px; }
+.nav-btn { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: 700; color: var(--secondary); }
+.nav-btn.active { border-color: var(--primary); color: var(--primary); background: #e7f1ff; }
+.nav-btn.filled { background: var(--success); border-color: var(--success); color: #fff; }
+.warn { color: var(--danger); text-align: center; font-size: .8rem; margin-top: 10px; }
+.tab-warn { margin-top: 10px; background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; border-radius: 8px; padding: 8px; text-align: center; font-weight: 600; font-size: .85rem; }
+
+@media (max-width: 768px) {
+    .main { flex-direction: column; }
+    .nav-panel { max-width: none; }
 }
-
-/* --- Login Box --- */
-.login-box { 
-    background: var(--card); width: 90%; max-width: 380px; padding: 2.5rem 2rem; 
-    border-radius: 1.5rem; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
-}
-.login-header { text-align: center; margin-bottom: 2rem; } 
-.login-header h2 { margin: 0; color: var(--primary); font-weight: 800; letter-spacing: -0.5px; font-size: 1.5rem;}
-.logo-img { display: block; width: 64px; height: 64px; margin: 0 auto 15px; border-radius: 50%; box-shadow: var(--shadow-sm); }
-
-/* --- Forms & Inputs --- */
-.form-control { 
-    width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; 
-    box-sizing: border-box; font-size: 0.95rem; transition: all 0.2s ease; margin-bottom: 15px;
-    background: #f8fafc; color: var(--text);
-}
-.form-control:focus { 
-    background: var(--card); border-color: var(--primary); outline: none; 
-    box-shadow: 0 0 0 3px rgba(14, 88, 166, 0.15); 
-}
-.password-wrapper { position: relative; margin-bottom: 15px; } 
-.password-wrapper input { margin-bottom: 0; padding-right: 45px; }
-.eye-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--secondary); font-size: 1.1rem; transition: 0.2s; }
-.eye-icon:hover { color: var(--primary); }
-.token-wrapper { display: flex; gap: 12px; margin-bottom: 20px; } 
-
-/* --- Buttons --- */
-.btn-request { background: var(--secondary); color: white; border: none; border-radius: 10px; font-size: 0.8rem; font-weight: 600; padding: 0 15px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-.btn-request:hover { background: #475569; }
-.btn-block { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: all 0.2s ease; letter-spacing: 0.5px; } 
-.btn-block:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn-block:active { transform: translateY(0); }
-
-/* --- Rules Screen --- */
-#rulesScreen { display: none; position: fixed; inset: 0; z-index: 998; flex-direction: column; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); padding: 20px; }
-.rules-card { background: var(--card); border-radius: 1.2rem; width: 100%; max-width: 600px; box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column; max-height: 90vh; border: 1px solid var(--border); }
-.rules-header { background: var(--primary); color: white; padding: 18px; text-align: center; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px;}
-.rules-body { padding: 25px; overflow-y: auto; } 
-.info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; } 
-.info-table td { padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: 0.95rem; } 
-.info-table td:first-child { font-weight: 600; width: 140px; color: var(--secondary); }
-.rules-content { background: var(--bg); padding: 18px; border-radius: 10px; border: 1px solid var(--border); font-size: 0.9rem; line-height: 1.7; white-space: pre-line; margin-bottom: 20px; color: var(--text); }
-.rules-footer { padding: 18px 25px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; }
-.btn-start { background: var(--success); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; box-shadow: var(--shadow-sm); }
-.btn-start:hover { background: #059669; transform: translateY(-1px); }
-
-/* --- Exam Area --- */
-#ujianScreen { display: none; flex-direction: column; height: 100%; } 
-.top-bar { background: var(--card); padding: 12px 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; z-index: 100; box-shadow: var(--shadow-sm); transition: 0.3s;} 
-.top-bar .logo-img { width: 38px; height: 38px; margin: 0; border-radius: 8px; box-shadow: none;} 
-.user-info { font-size: 0.95rem; font-weight: 600; color: var(--text); }
-.main-area { display: flex; flex: 1; overflow: hidden; gap: 20px; padding: 20px; position: relative;} 
-
-/* --- Panels --- */
-.soal-panel { flex: 3; background: var(--card); border-radius: var(--radius); padding: 30px; overflow-y: auto; display: flex; flex-direction: column; box-shadow: var(--shadow); border: 1px solid var(--border); transition: 0.3s;} 
-.nav-panel { flex: 1; background: var(--card); border-radius: var(--radius); padding: 25px; overflow-y: auto; max-width: 320px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: 0.3s;}
-.nomor-soal { display: flex; justify-content: space-between; border-bottom: 2px solid var(--bg); padding-bottom: 15px; margin-bottom: 20px; font-weight: 700; color: var(--primary); }
-.teks-soal { line-height: 1.7; margin-bottom: 25px; color: var(--text); } 
-.teks-soal img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-top: 10px;}
-
-/* --- Options --- */
-.opsi-group { display: flex; flex-direction: column; gap: 12px; } 
-.opsi-item { display: flex; align-items: flex-start; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; background: var(--card); } 
-.opsi-item:hover { background: var(--bg); border-color: #cbd5e1; } 
-.opsi-item:has(input:checked) { border-color: var(--primary); background: #e7f1ff; } 
-.opsi-item input { margin-right: 15px; margin-top: 4px; transform: scale(1.3); accent-color: var(--primary); }
-.opsi-content { flex: 1; overflow-x: auto; line-height: 1.5; }
-.opsi-content p { margin: 0; padding: 0; }
-.opsi-content img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 10px 0; }
-
-/* --- Jodohkan --- */
-.jodoh-container { position: relative; display: flex; justify-content: space-between; gap: 40px; padding: 25px 10px; user-select: none; } 
-.jodoh-col { display: flex; flex-direction: column; gap: 20px; flex: 1; z-index: 2; } 
-.jodoh-item { background: var(--card); border: 2px solid var(--border); padding: 16px; border-radius: 10px; cursor: pointer; position: relative; transition: 0.2s; display: flex; align-items: center; min-height: 45px; font-weight: 500; box-shadow: var(--shadow-sm); } 
-.jodoh-item:hover { border-color: var(--primary); transform: translateY(-2px); } 
-.jodoh-item.selected { background: #e7f1ff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(14, 88, 166, 0.2); } 
-.jodoh-item.matched { border-color: var(--success); background: #f0fdf4; } 
-.jodoh-dot { width: 14px; height: 14px; background: #94a3b8; border-radius: 50%; position: absolute; top: 50%; transform: translateY(-50%); border: 2px solid white; box-shadow: 0 0 0 1px var(--border); } 
-.jodoh-item-left .jodoh-dot { right: -8px; } 
-.jodoh-item-right .jodoh-dot { left: -8px; } 
-.jodoh-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; } 
-line { stroke: var(--primary); stroke-width: 3.5; stroke-linecap: round; }
-
-/* --- Upload Area --- */
-.upload-area { border: 2px dashed var(--secondary); padding: 25px; text-align: center; border-radius: 10px; background: var(--bg); margin-bottom: 20px; transition: 0.2s; } 
-.upload-area:hover { border-color: var(--primary); background: #e7f1ff; }
-.preview-box { margin-top: 15px; display: none; } 
-.preview-box img { max-width: 180px; border-radius: 8px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-
-/* --- Navigation Grid --- */
-.nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; } 
-.nav-btn { aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; font-size: 0.95rem; color: var(--secondary); background: var(--card); transition: 0.2s; } 
-.nav-btn:hover { border-color: var(--secondary); color: var(--text); }
-.nav-btn.active { border-color: var(--primary); background: #e7f1ff; color: var(--primary); box-shadow: 0 0 0 2px rgba(14, 88, 166, 0.2); } 
-.nav-btn.filled { background: var(--success); color: white; border-color: var(--success); }
-
-/* --- Timers & Warnings --- */
-.timer-display { background: #fffbeb; color: #b45309; padding: 15px; text-align: center; border-radius: 10px; font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; border: 1px solid #fde68a; box-shadow: var(--shadow-sm); letter-spacing: 1px; transition: 0.3s;}
-.tab-switch-warning { background: #fef2f2; color: var(--danger); padding: 8px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; text-align: center; font-weight: 600; border: 1px solid #fecaca; transition: 0.3s;}
-
-/* --- Footers --- */
-.footer-controls { margin-top: auto; display: flex; justify-content: space-between; padding-top: 30px; } 
-.btn-nav { padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: 700; font-size: 0.95rem; transition: 0.2s; box-shadow: var(--shadow-sm); } 
-.btn-prev { background: var(--secondary); } 
-.btn-prev:hover { background: #475569; transform: translateY(-1px); }
-.btn-next { background: var(--primary); } 
-.btn-next:hover { background: var(--primary-dark); transform: translateY(-1px); }
-.btn-submit { background: var(--success); display: none; } 
-.btn-submit:hover { background: #059669; transform: translateY(-1px); }
-.main-footer { text-align: center; padding: 12px; background: var(--card); font-size: 0.8rem; color: var(--secondary); font-weight: 500; border-top: 1px solid var(--border); transition: 0.3s;}
-
-/* --- Modals --- */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; } 
-.modal-content { background: var(--card); width: 90%; max-width: 380px; padding: 25px; border-radius: 1.2rem; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: var(--shadow-lg); transition: 0.3s;} 
-.close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--secondary); transition: 0.2s; }
-.close-modal:hover { color: var(--danger); }
-
-/* --- Top Bar Controls (NEW) --- */
-.top-controls { display: flex; gap: 8px; align-items: center; }
-.btn-icon { background: var(--secondary); color: white; border: none; width: 35px; height: 35px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; transition: 0.2s; }
-.btn-icon:hover { background: #475569; transform: scale(1.05); }
-
-/* --- Mobile Responsiveness --- */
-@media(max-width: 768px) { 
-    .main-area { flex-direction: column; padding: 12px; gap: 15px; } 
-    .nav-panel { display: none; } 
-    .mobile-header-panel { display: flex; flex-direction: column; gap: 10px; background: var(--card); padding: 15px; border-radius: var(--radius); border: 1px solid var(--border); position: sticky; top: 0; z-index: 95; box-shadow: var(--shadow); transition: 0.3s;} 
-    .mobile-top-row { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1rem; } 
-    .m-timer { color: #b45309; background: #fffbeb; padding: 8px 12px; border-radius: 8px; border: 1px solid #fde68a; transition: 0.3s;} 
-    .m-violation { color: var(--danger); background: #fef2f2; padding: 8px 12px; border-radius: 8px; font-size: 0.9rem; border: 1px solid #fecaca; transition: 0.3s;} 
-    .mobile-nav-trigger-btn { background: var(--bg); color: var(--text); border: 2px solid var(--border); width: 100%; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; } 
-    .mobile-nav-trigger-btn:active { background: #e2e8f0; transform: scale(0.98); } 
-    .soal-panel { width: 100%; margin-bottom: 10px; box-sizing: border-box; padding: 20px 15px; } 
-    .footer-controls { flex-direction: row; flex-wrap: wrap; gap: 10px; }
-    .btn-nav { flex: 1; min-width: 120px; text-align: center; }
-}
-@media(min-width: 769px) { .mobile-header-panel { display: none; } }
-    </style>
+</style>
 </head>
-<body class="font-medium"> 
+<body class="font-medium">
 
-    <div id="loginScreen">
-        <div class="login-box">
-            <div class="login-header">
-                <img src="https://lh3.googleusercontent.com/d/196-yYlDwDc-tUVDTslzPAlBWTmf4ZbWg" alt="Logo CBT" class="logo-img">
-                <h2>CBT DUA DIMENSI</h2>
-                <p id="date_time" style="margin:5px 0 0; color:#777;"></p>
-            </div>
-            <select id="selKelas" class="form-control" onchange="filterUjian()"><option value="">Pilih Kelas</option></select>
-            <select id="selUjian" class="form-control" disabled onchange="cekTokenOtomatis()"><option value="">Pilih Ujian</option></select>
-            <input type="text" id="inpUser" class="form-control" placeholder="Username" autocomplete="off">
-            <div class="password-wrapper">
-                <input type="password" id="inpPass" class="form-control" placeholder="Password">
-                <span class="eye-icon" id="eyeIcon" onclick="togglePass()">👁</span>
-            </div>
-            <div class="token-wrapper">
-                <input type="text" id="inpToken" class="form-control" placeholder="Token Masuk Ujian" style="margin-bottom:0; text-transform:uppercase;">
-                <button class="btn-request" onclick="requestTokenMsg()">Request<br>Token</button>
-            </div>
-            <button id="btnLogin" class="btn-block" onclick="doLogin()">MASUK</button>
-            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(--secondary); font-weight: 500;">
-                © 2026 CBT Klinik Edukasi Dua Dimensi Yogyakarta. All Rights Reserved.
-            </div>
+<!-- LOGIN -->
+<div id="loginScreen" class="screen on">
+    <div class="card box">
+        <div class="head">
+            <img class="logo" src="https://lh3.googleusercontent.com/d/196-yYlDwDc-tUVDTslzPAlBWTmf4ZbWg" alt="Logo">
+            <h2 id="judul">CBT DUA DIMENSI</h2>
+            <p id="lembaga" class="muted small"></p>
+            <p id="dateTime" class="muted small"></p>
+        </div>
+        <div id="pengumuman" class="notice" style="display:none"></div>
+        <input id="inpNama" class="fc" placeholder="Nama lengkap" autocomplete="off">
+        <input id="inpSekolah" class="fc" list="listSekolah" placeholder="Asal sekolah (ketik untuk mencari)" autocomplete="off">
+        <datalist id="listSekolah"></datalist>
+        <input id="inpKelas" class="fc" placeholder="Kelas (mis. XII IPA 1)" autocomplete="off">
+        <input id="inpWA" class="fc" inputmode="numeric" placeholder="Nomor WA aktif" autocomplete="off">
+        <button id="btnLogin" class="btn-block" onclick="doLogin()">MASUK</button>
+        <button class="btn-link" onclick="bukaCekHasil()">Cek Hasil Ujian</button>
+        <div class="foot">© 2026 CBT Klinik Edukasi Dua Dimensi Yogyakarta</div>
+    </div>
+</div>
+
+<!-- MENU SESI -->
+<div id="menuScreen" class="screen">
+    <div class="topbar">
+        <div>
+            <b id="mNama"></b>
+            <div class="muted small" id="mSub"></div>
+        </div>
+        <div class="tc">
+            <button class="btn-icon" onclick="changeFontSize()" title="Ukuran font">Aa</button>
+            <button class="btn-icon" onclick="toggleTheme()" title="Mode gelap / terang"><i class="fas fa-moon"></i></button>
+            <button class="btn-small" onclick="bukaCekHasil()">Cek Hasil</button>
+            <button class="btn-small" onclick="logout()">Keluar</button>
         </div>
     </div>
+    <div class="wrap">
+        <div id="pilihanBox" class="card" style="display:none; margin-bottom:16px">
+            <h3 style="margin-top:0">Pilih Peminatan</h3>
+            <p class="muted small">Pilih satu atau lebih peminatan secara utuh. Pilihan dikunci setelah sesi peminatan pertama dimulai.</p>
+            <div id="pilihanList"></div>
+            <button class="btn-block" onclick="simpanPilihan()">SIMPAN PILIHAN</button>
+        </div>
+        <div id="sesiList"></div>
+    </div>
+</div>
 
-    <div id="rulesScreen">
-        <div class="rules-card">
-            <div class="rules-header">Konfirmasi Data & Tata Tertib</div>
-            <div class="rules-body">
-                <table class="info-table">
-                    <tr><td>Nama Peserta</td><td id="infoNama">: -</td></tr>
-                    <tr><td>NISN / User</td><td id="infoNisn">: -</td></tr>
-                    <tr><td>Mapel Ujian</td><td id="infoMapel">: -</td></tr>
-                    <tr><td>Kode Ujian</td><td id="infoKode">: -</td></tr>
-                </table>
-                <div style="font-weight:bold; margin-bottom:5px; color:var(--text);">Tata Tertib Ujian:</div>
-                <div class="rules-content" id="txtRules"></div>
-            </div>
-            <div class="rules-footer">
-                <button onclick="backToLogin()" style="background:var(--secondary); color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer;">Batal</button>
-                <button class="btn-start" onclick="beginExam()">MULAI MENGERJAKAN</button>
-            </div>
+<!-- KONFIRMASI & TATA TERTIB -->
+<div id="rulesScreen" class="screen overlay">
+    <div class="card modal">
+        <div class="card-head">Konfirmasi Data & Tata Tertib</div>
+        <table class="info">
+            <tr><td>Nama</td><td id="rNama"></td></tr>
+            <tr><td>Sekolah</td><td id="rSekolah"></td></tr>
+            <tr><td>Sesi</td><td id="rSesi"></td></tr>
+            <tr><td>Mapel</td><td id="rMapel"></td></tr>
+            <tr><td>Durasi</td><td id="rDurasi"></td></tr>
+        </table>
+        <div class="rules" id="rTata"></div>
+        <div class="row-end">
+            <button class="btn-secondary" onclick="showScreen('menuScreen')">Batal</button>
+            <button class="btn-start" onclick="mulaiSesiSekarang()">MULAI MENGERJAKAN</button>
         </div>
     </div>
+</div>
 
-    <div id="ujianScreen">
-        <div class="top-bar">
-            <div style="display:flex; align-items:center;">
-                <img src="https://lh3.googleusercontent.com/d/1O94lUuV8pHaSiGCoOsxUsOUL7bGsHjTC" alt="Logo" class="logo-img" style="margin-right:10px;">
-                <div class="user-info"><span id="namaUser">Nama Peserta</span> | <span id="kodeUser">Kode</span></div>
-            </div>
-            
-            <div class="top-controls">
-                <button class="btn-icon" onclick="changeFontSize()" title="Ubah Ukuran Font">Aa</button>
-                <button class="btn-icon" id="btnThemeToggle" onclick="toggleTheme()" title="Mode Gelap / Terang"><i class="fas fa-moon"></i></button>
-                <button onclick="confirmFinish()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:8px; font-weight:bold; cursor:pointer; margin-left:5px;">Selesai</button>
-            </div>
-
-        </div>
-        <div class="main-area">
-            <div class="mobile-header-panel">
-                <div class="mobile-top-row">
-                    <div id="timerMobile" class="m-timer"><i class="fas fa-clock"></i> 00:00:00</div>
-                    <div id="violationMobile" class="m-violation"><i class="fas fa-exclamation-triangle"></i> 0/2</div>
-                </div>
-                <button class="mobile-nav-trigger-btn" onclick="toggleNavModal()"><i class="fas fa-th"></i> Daftar Soal</button>
-            </div>
-            <div class="soal-panel">
-                <div id="soalContainer"></div>
-                <div class="footer-controls">
-                    <button class="btn-nav btn-prev" onclick="move(-1)" id="btnPrev">Sebelumnya</button>
-                    <button class="btn-nav btn-next" onclick="move(1)" id="btnNext">Selanjutnya</button>
-                    <button class="btn-nav btn-submit" onclick="confirmFinish()" id="btnFinish">Selesai / Kirim</button>
-                </div>
-            </div>
-            <div class="nav-panel">
-                <div class="timer-display" id="timer">00:00:00</div>
-                <div style="font-size:0.85rem; margin-bottom:10px; font-weight:bold;">Navigasi Soal</div>
-                <div class="nav-grid" id="navGrid"></div>
-                <div style="margin-top:20px; font-size:0.8rem; color:var(--danger); text-align:center;">⚠️ Dilarang pindah tab / keluar fullscreen!</div>
-                <div class="tab-switch-warning" id="tabWarning">Pelanggaran: 0/3</div>
-            </div>
-        </div>
-        <div class="main-footer">CBT DUA DIMENSI © 2026</div>
-    </div>
-
-    <div class="modal-overlay" id="mobileNavModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="toggleNavModal()">×</span>
-            <div style="text-align:center; font-weight:bold; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:10px;">Daftar Soal</div>
-            <div class="nav-grid" id="navGridMobile"></div>
-            <div style="margin-top:15px; font-size:0.8rem; color:var(--danger); text-align:center;">Jaga kejujuran dalam mengerjakan ujian.</div>
+<!-- UJIAN -->
+<div id="ujianScreen" class="screen">
+    <div class="topbar">
+        <div><b id="uNama"></b> <span class="muted">|</span> <span id="uSesi"></span></div>
+        <div class="tc">
+            <button class="btn-icon" onclick="changeFontSize()" title="Ukuran font">Aa</button>
+            <button class="btn-icon" onclick="toggleTheme()" title="Mode gelap / terang"><i class="fas fa-moon"></i></button>
+            <button class="btn-danger" onclick="konfirmasiKirim()">Selesai</button>
         </div>
     </div>
-
-    <div id="successScreen" style="display:none;">
-        <div style="background:var(--card); padding:40px; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1); text-align:center; max-width:400px; width:90%;">
-            <div style="font-size:4rem; color:var(--success); margin-bottom:10px;">🎉</div>
-            <h2 style="color:var(--text); margin:0;">Ujian Selesai</h2>
-            <div id="successScore"></div>
-            <p id="successMsg" style="color:var(--secondary);"></p>
-            <button onclick="backToLogin()" style="margin-top:20px; padding:12px 30px; background:var(--primary); color:white; border:none; border-radius:50px; font-weight:bold; cursor:pointer;">Kembali ke Login</button>
-            <button id="btnLihatRekap" onclick="bukaModalRekap()" style="margin-top:10px; padding:12px 30px; background:var(--success); color:white; border:none; border-radius:50px; font-weight:bold; cursor:pointer; display:none;">
-    <i class="fas fa-list-alt"></i> Lihat Hasil Seluruh Mata Pelajaran</button>
-        </div>
-    </div>
-
-    <div id="transitionScreen" style="display:none; position:fixed; inset:0; z-index:999; align-items:center; justify-content:center; background:var(--bg);">
-        <div style="background:var(--card); padding:40px; border-radius:15px; box-shadow:var(--shadow-lg); text-align:center; max-width:400px; width:90%; border:1px solid var(--border);">
-            <div style="font-size:3.5rem; color:var(--primary); margin-bottom:15px;"><i class="fas fa-check-circle"></i></div>
-            <h3 style="margin:0 0 10px; color:var(--text);">Jawaban Tersimpan!</h3>
-            <p style="color:var(--secondary); font-size:0.95rem; margin-bottom:25px;">Data jawaban berhasil direkam. Silakan lanjut ke sub-tes berikutnya.</p>
-            <div style="background:#e7f1ff; border:1px solid #93c5fd; padding:20px; border-radius:10px; margin-bottom:25px;">
-                <div style="font-size:0.85rem; color:#1e3a8a; font-weight:bold; text-transform:uppercase;">Mapel Selanjutnya:</div>
-                <div id="nextExamName" style="font-size:1.2rem; color:var(--primary); font-weight:900; margin-top:8px;">-</div>
+    <div class="main">
+        <div class="soal-panel">
+            <div id="soalBox"></div>
+            <div class="foot-nav">
+                <button class="btn-prev" id="btnPrev" onclick="geser(-1)">Sebelumnya</button>
+                <button class="btn-next" id="btnNext" onclick="geser(1)">Selanjutnya</button>
             </div>
-            <button onclick="lanjutSubTes()" class="btn-block" style="background:#10b981;">LANJUT KERJAKAN SEKARANG <i class="fas fa-arrow-right" style="margin-left:5px;"></i></button>
+        </div>
+        <div class="nav-panel">
+            <div class="timer" id="timer">00:00:00</div>
+            <div class="muted small"><b>Navigasi Soal</b></div>
+            <div class="nav-grid" id="navGrid"></div>
+            <div class="warn">⚠️ Dilarang pindah tab / keluar layar penuh.</div>
+            <div class="tab-warn" id="tabWarn">Pelanggaran: 0</div>
         </div>
     </div>
-    <!-- Modal Rekap Nilai Gabungan -->
-<div class="modal-overlay" id="modalRekapNilai">
-    <div class="modal-content" style="max-width:450px;">
-        <span class="close-modal" onclick="tutupModalRekap()">×</span>
-        <h3 style="text-align:center; color:var(--primary); margin-top:0;">Rekap Hasil Ujian</h3>
-        <hr>
-        <div id="isiTabelRekap"></div>
-        <button onclick="tutupModalRekap()" class="btn-block" style="margin-top:15px; background:var(--secondary);">Tutup</button>
+</div>
+
+<!-- HASIL SETELAH KIRIM -->
+<div id="hasilScreen" class="screen overlay">
+    <div class="card modal center">
+        <div style="font-size:3rem; color:var(--success)"><i class="fas fa-check-circle"></i></div>
+        <h2 style="margin:4px 0">Jawaban Terkirim</h2>
+        <div id="hasilBody"></div>
+        <button class="btn-block" style="margin-top:14px" onclick="loadMenu()">KEMBALI KE MENU</button>
+    </div>
+</div>
+
+<!-- CEK HASIL -->
+<div id="cekScreen" class="screen overlay">
+    <div class="card modal">
+        <div class="card-head">Cek Hasil Ujian</div>
+        <input id="cNama" class="fc" placeholder="Nama lengkap (sesuai pendaftaran)" autocomplete="off">
+        <input id="cWA" class="fc" inputmode="numeric" placeholder="4 digit terakhir nomor WA" autocomplete="off">
+        <button class="btn-block" onclick="doCekHasil()">CEK HASIL</button>
+        <div id="cHasil" style="margin-top:14px"></div>
+        <button class="btn-secondary" style="margin-top:14px" onclick="tutupCek()">Tutup</button>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_6HFCjtCbO0ZqQ5P2yxIlJCQt7wukwWvgq2FYz9AJIWAcxn3-seGc2zwIKvl82uDA/exec';
+// ===== KONFIGURASI =====
+// Ganti dengan URL Web App GAS (deployment) yang memuat Code.gs + Api.gs
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMjJF4P8MpqfSWVgoC7G_zAk9topAGBRdE1zGFxFfeviSCiN2DkL1O67FawdhupisX/exec';
+const TATA_TERTIB = [
+    '1. Kerjakan secara jujur dan mandiri.',
+    '2. Dilarang membuka tab atau aplikasi lain, dan dilarang keluar dari layar penuh.',
+    '3. Jawaban tersimpan otomatis. Tekan "Selesai" setelah semua soal dijawab.',
+    '4. Jika waktu habis, jawaban dikirim otomatis oleh sistem.'
+].join('\n');
+const TIPE = { PG: 'Pilihan Ganda', MCMA: 'Pilihan Ganda Kompleks', BS: 'Benar / Salah', TKP: 'Tes Karakteristik Pribadi', URAIAN: 'Uraian', ISIAN: 'Isian Singkat' };
+const SCREENS = ['loginScreen', 'menuScreen', 'rulesScreen', 'ujianScreen', 'hasilScreen'];
+const KEY_PESERTA = 'cbt_peserta', KEY_PIL = 'cbt_pilihan', KEY_FONT = 'cbt_font', KEY_THEME = 'cbt_theme';
 
-// --- FITUR TEMA & FONT ---
-let currentFontState = 1; // 0=Kecil, 1=Medium, 2=Besar
-const fontClasses = ['font-small', 'font-medium', 'font-large'];
+// ===== STATE =====
+let meta = null;                       // pengaturan umum dari getDataLogin
+let peserta = null;                    // { nama, sekolah, kelas, wa }
+let pilihan = [];                      // mapel peminatan (UPPERCASE)
+let progres = { selesai: [], pilihan: [], sesi: {} };
+let sesiList = [];
+let pilihSesi = null;
+let cur = null;                        // sesi yang sedang dikerjakan
+let offsetMs = 0;                      // selisih jam server - jam perangkat
+let timerId = null, saveId = null, dirty = false, tabCount = 0;
 
-function changeFontSize() {
-    document.body.classList.remove(...fontClasses);
-    currentFontState = (currentFontState + 1) % 3;
-    document.body.classList.add(fontClasses[currentFontState]);
-    localStorage.setItem('cbt_font_size', currentFontState);
+// ===== UTIL =====
+const now = () => Date.now() + offsetMs;
+const val = id => document.getElementById(id).value;
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const parseImg = html => (html || '').replace(/<img\s+id=([a-zA-Z0-9_-]+)>/g, (m, id) => `<img src="https://drive.google.com/thumbnail?id=${id}&sz=w800">`);
+const pad = n => String(n).padStart(2, '0');
+const fmtDetik = s => `${pad(Math.floor(s / 3600))}:${pad(Math.floor((s % 3600) / 60))}:${pad(s % 60)}`;
+const waktu = ms => new Date(ms).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta', dateStyle: 'medium', timeStyle: 'short' });
+const terisi = a => a == null ? false : Array.isArray(a) ? a.length > 0 : typeof a === 'object' ? Object.keys(a).length > 0 : String(a).trim() !== '';
+const kunciAns = s => `cbt_ans|${peserta.nama}|${peserta.sekolah}|${s}`;
+
+function showScreen(id) {
+    SCREENS.forEach(s => document.getElementById(s).classList.toggle('on', s === id));
+    window.scrollTo(0, 0);
 }
 
-function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('cbt_theme', isDark ? 'dark' : 'light');
-    document.getElementById('btnThemeToggle').innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-}
-
-function loadPreferences() {
-    const savedTheme = localStorage.getItem('cbt_theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.getElementById('btnThemeToggle').innerHTML = '<i class="fas fa-sun"></i>';
-    }
-
-    const savedFont = localStorage.getItem('cbt_font_size');
-    if (savedFont !== null) {
-        document.body.classList.remove(...fontClasses);
-        currentFontState = parseInt(savedFont);
-        document.body.classList.add(fontClasses[currentFontState]);
-    }
-}
-// -------------------------
-
-async function fetchAPI(action, payload = {}) {
+async function api(action, payload = {}) {
+    if (SCRIPT_URL.startsWith('GANTI')) return { status: 'error', message: 'URL server belum diatur di index.html.' };
     try {
-        const response = await fetch(SCRIPT_URL, {
+        const res = await fetch(SCRIPT_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: action, payload: payload })
         });
-        return await response.json();
-    } catch (error) {
-        console.error('API Error:', error);
-        return { status: 'error', message: 'Gagal terhubung ke server CBT.' };
+        return await res.json();
+    } catch (e) {
+        return { status: 'error', message: 'Gagal terhubung ke server CBT. Periksa koneksi internet Anda.' };
     }
 }
 
-let allExams = [], examData = [], examDataRaw = null, answers = {}, currIdx = 0, timerInterval, userMeta = {}, isSubmitting = false, tabSwitchCount = 0, selectedLeftId = null, initialTime = 0, remainingTime = 0, isRefreshing = false;
-const SESSION_KEY = 'cbt_user_session';
+function bio() {
+    return { nama: peserta.nama, asalSekolah: peserta.sekolah, kelas: peserta.kelas, nomorWA: peserta.wa };
+}
 
-window.onload = () => {
-    loadPreferences(); // Load Theme & Font
-    if(checkSession()) return;
-    Swal.fire({ title: 'Memuat Data...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
-    fetchAPI('getDataLogin').then(res => initData(res));
-    
+function loading(judul, teks = '') {
+    Swal.fire({ title: judul, text: teks, allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+}
+
+// ===== PREFERENSI =====
+const FONT = ['font-small', 'font-medium', 'font-large'];
+function loadPrefs() {
+    if (localStorage.getItem(KEY_THEME) === 'dark') applyTheme(true);
+    const f = parseInt(localStorage.getItem(KEY_FONT) || '1', 10);
+    document.body.classList.remove(...FONT);
+    document.body.classList.add(FONT[isNaN(f) ? 1 : f]);
+}
+function changeFontSize() {
+    const f = (FONT.findIndex(c => document.body.classList.contains(c)) + 1) % 3;
+    document.body.classList.remove(...FONT);
+    document.body.classList.add(FONT[f]);
+    localStorage.setItem(KEY_FONT, f);
+}
+function applyTheme(dark) {
+    document.body.classList.toggle('dark-mode', dark);
+}
+function toggleTheme() {
+    const dark = !document.body.classList.contains('dark-mode');
+    applyTheme(dark);
+    localStorage.setItem(KEY_THEME, dark ? 'dark' : 'light');
+}
+function updateClock() {
+    document.getElementById('dateTime').innerText = new Date(now()).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+}
+function blockCheating() {
     document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) || (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false; }
-    window.addEventListener('beforeunload', () => { isRefreshing = true; });
+    document.onkeydown = e => {
+        if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && [73, 67, 74].includes(e.keyCode)) || (e.ctrlKey && e.keyCode === 85)) return false;
+    };
+}
+
+// ===== START =====
+window.onload = async () => {
+    loadPrefs();
+    updateClock(); setInterval(updateClock, 1000);
+    blockCheating();
+    loading('Memuat data...');
+    const r = await api('getDataLogin');
+    Swal.close();
+    if (r.status !== 'success') {
+        showScreen('loginScreen');
+        Swal.fire('Gagal', r.message || 'Tidak dapat memuat data.', 'error');
+        return;
+    }
+    meta = r;
+    offsetMs = r.serverNow - Date.now();
+    renderLoginMeta();
+    const sv = localStorage.getItem(KEY_PESERTA);
+    if (sv) {
+        peserta = JSON.parse(sv);
+        pilihan = JSON.parse(localStorage.getItem(KEY_PIL) || '[]');
+        await loadMenu();
+    } else {
+        showScreen('loginScreen');
+    }
 };
 
-function initData(res) {
-    Swal.close();
-    if(res.status !== 'ok') return Swal.fire('Error', res.message, 'error');
-    const selKelas = document.getElementById('selKelas');
-    selKelas.innerHTML = '<option value="">-- Pilih Kelas --</option>';
-    
-    let kelasTerurut = res.kelas.sort((a, b) => {
-        return a.toString().localeCompare(b.toString(), undefined, { numeric: true, sensitivity: 'base' });
-    });
-
-    kelasTerurut.forEach(k => { 
-        let opt = document.createElement('option'); 
-        opt.value = k; 
-        opt.text = k; 
-        selKelas.add(opt); 
-    });
-    
-    allExams = res.ujian;
-}
-
-function checkSession() {
-    const sess = localStorage.getItem(SESSION_KEY);
-    if(sess) {
-        try {
-            const data = JSON.parse(sess);
-            userMeta = data.meta; examDataRaw = data.raw; examData = data.raw.soal;
-            
-            if(data.status === 'running') {
-                document.getElementById('loginScreen').style.display = 'none';
-                const now = new Date().getTime();
-                const sisa = Math.floor((data.endTime - now) / 1000);
-                if(sisa > 0) { examDataRaw.sisaDetik = sisa; startExamUI(examDataRaw); }
-                else { startExamUI(examDataRaw); setTimeout(() => submitExam(true), 1000); }
-            } else if (data.status === 'transition') {
-                // Aman jika refresh: Langsung kembalikan ke layar Lanjut Mapel
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('nextExamName').innerText = userMeta.kodeLanjutan;
-                document.getElementById('transitionScreen').style.display = 'flex';
-            } else { 
-                showRules(examDataRaw); 
-            }
-            return true;
-        } catch(e) { localStorage.removeItem(SESSION_KEY); return false; }
+function renderLoginMeta() {
+    document.getElementById('judul').innerText = meta.judul || 'CBT DUA DIMENSI';
+    document.getElementById('lembaga').innerText = meta.lembaga || '';
+    if (meta.pengumuman) {
+        const n = document.getElementById('pengumuman');
+        n.innerText = meta.pengumuman; n.style.display = 'block';
     }
-    return false;
-}
-
-function togglePass() { 
-    const inp = document.getElementById('inpPass'); const icon = document.getElementById('eyeIcon');
-    if (inp.type === 'password') { inp.type = 'text'; icon.innerText = '👀'; } else { inp.type = 'password'; icon.innerText = '👁️'; }
-}
-
-function filterUjian() {
-    const kelas = document.getElementById('selKelas').value;
-    const selUjian = document.getElementById('selUjian'); selUjian.innerHTML = '<option value="">-- Pilih Ujian --</option>'; selUjian.disabled = !kelas;
-    if(kelas) {
-        const filtered = allExams.filter(u => u.kelasTarget === 'ALL' || u.kelasTarget === kelas);
-        if(filtered.length === 0) { let opt = document.createElement('option'); opt.text = "Tidak ada ujian aktif"; selUjian.add(opt); }
-        else { filtered.forEach(u => { let opt = document.createElement('option'); opt.value = u.kode; opt.text = u.judul; selUjian.add(opt); }); }
+    document.getElementById('listSekolah').innerHTML = (meta.sekolah || [])
+        .map(s => `<option value="${esc(s.n)}" label="${esc(s.k)}"></option>`).join('');
+    const tutup = meta.statusUjian === 'NONAKTIF' || (meta.jadwalSelesai && Date.now() > meta.jadwalSelesai);
+    document.getElementById('btnLogin').disabled = !!tutup;
+    if (tutup) {
+        const n = document.getElementById('pengumuman');
+        n.innerText = 'Ujian sedang ditutup oleh pengelola.'; n.style.display = 'block';
     }
-    cekTokenOtomatis();
 }
 
-function cekTokenOtomatis() {
-    const kodeUjian = document.getElementById('selUjian').value;
-    const inpToken = document.getElementById('inpToken'); const ujianTerpilih = allExams.find(u => u.kode === kodeUjian);
-    if (ujianTerpilih && ujianTerpilih.autoToken) { inpToken.value = ujianTerpilih.autoToken; inpToken.readOnly = true; inpToken.style.backgroundColor = "var(--border)"; inpToken.style.fontWeight = "bold"; }
-    else { inpToken.value = ""; inpToken.readOnly = false; inpToken.style.backgroundColor = ""; inpToken.style.fontWeight = "normal"; }
-}
-
-function requestTokenMsg() { Swal.fire({ title: 'Info Token', text: 'Minta token pada pengawas.', icon: 'info' }); }
-
-function backToLogin() {
-    document.getElementById('successScreen').style.display = 'none'; document.getElementById('transitionScreen').style.display = 'none'; document.getElementById('ujianScreen').style.display = 'none'; document.getElementById('rulesScreen').style.display = 'none'; document.getElementById('loginScreen').style.display = 'flex';
-    document.getElementById('inpUser').value = ''; document.getElementById('inpPass').value = ''; document.getElementById('inpToken').value = '';
-    answers = {}; currIdx = 0; userMeta = {}; examDataRaw = null; examData = []; isSubmitting = false; tabSwitchCount = 0;
-    clearInterval(timerInterval); localStorage.removeItem(SESSION_KEY);
-    if (document.fullscreenElement) document.exitFullscreen().catch(e=>console.log(e));
-}
-
-function doLogin() {
-    const kelas = document.getElementById('selKelas').value, kode = document.getElementById('selUjian').value, username = document.getElementById('inpUser').value.trim(), pass = document.getElementById('inpPass').value.trim(), token = document.getElementById('inpToken').value.trim();
-    if(!kelas || !kode || !username || !pass || !token) return Swal.fire('Info', 'Lengkapi data.', 'warning');
+async function doLogin() {
+    const nama = val('inpNama').replace(/\s+/g, ' ').trim();
+    const sekolah = val('inpSekolah').toUpperCase().replace(/\s+/g, ' ').trim();
+    const kelas = val('inpKelas').trim();
+    const wa = val('inpWA').replace(/\D/g, '');
+    if (!nama || !sekolah || !kelas || wa.length < 8) {
+        return Swal.fire('Info', 'Lengkapi nama, asal sekolah, kelas, dan nomor WA (min. 8 digit).', 'warning');
+    }
+    if ((meta.sekolah || []).length && !meta.sekolah.some(s => s.n === sekolah)) {
+        return Swal.fire('Info', 'Pilih asal sekolah dari daftar yang tersedia.', 'warning');
+    }
     const btn = document.getElementById('btnLogin');
-    btn.innerText = 'Memproses...'; btn.disabled = true;
+    btn.disabled = true; btn.innerText = 'Memproses...';
+    const r = await api('daftar', { nama, sekolah, kelas, wa });
+    btn.disabled = false; btn.innerText = 'MASUK';
+    if (r.status !== 'success') return Swal.fire('Gagal', r.message, 'error');
+    peserta = { nama, sekolah, kelas, wa };
+    localStorage.setItem(KEY_PESERTA, JSON.stringify(peserta));
+    pilihan = [];
+    await loadMenu();
+}
 
-    const exam = allExams.find(u => u.kode === kode);
-    if (exam && exam.customUA && exam.customUA.toUpperCase() !== 'ALL') {
-        if (!navigator.userAgent.includes(exam.customUA)) {
-            Swal.fire('Akses Ditolak', 'Browser ini tidak diizinkan.', 'error');
-            btn.disabled = false; btn.innerText = 'MASUK'; return;
+function logout() {
+    Swal.fire({ title: 'Keluar?', text: 'Anda perlu memasukkan data lagi untuk masuk.', icon: 'question', showCancelButton: true, confirmButtonText: 'Ya, keluar', cancelButtonText: 'Batal' })
+        .then(res => {
+            if (!res.isConfirmed) return;
+            localStorage.removeItem(KEY_PESERTA);
+            localStorage.removeItem(KEY_PIL);
+            peserta = null; pilihan = []; progres = { selesai: [], pilihan: [], sesi: {} }; sesiList = [];
+            showScreen('loginScreen');
+        });
+}
+
+// ===== MENU =====
+async function loadMenu() {
+    loading('Memuat sesi...');
+    const pg = await api('getProgres', { nama: peserta.nama, sekolah: peserta.sekolah });
+    if (pg.status !== 'success') return Swal.fire('Gagal', pg.message, 'error');
+    progres = pg;
+    offsetMs = pg.serverNow - Date.now();
+    if (pg.pilihan && pg.pilihan.length) pilihan = pg.pilihan;   // server adalah sumber utama
+    const ok = await refreshSesi();
+    Swal.close();
+    if (!ok) return Swal.fire('Gagal', 'Daftar sesi tidak dapat dimuat.', 'error');
+    showScreen('menuScreen');
+    renderMenu();
+}
+
+async function refreshSesi() {
+    let r = await api('daftarSesi', { mapelPilihan: pilihan });
+    if (r.status !== 'success' && pilihan.length) {
+        pilihan = []; localStorage.removeItem(KEY_PIL);
+        r = await api('daftarSesi', { mapelPilihan: [] });
+    }
+    if (r.status !== 'success') return false;
+    sesiList = r.sesi;
+    return true;
+}
+
+function renderMenu() {
+    document.getElementById('mNama').innerText = peserta.nama;
+    document.getElementById('mSub').innerText = `${peserta.sekolah} · ${peserta.kelas}`;
+
+    const kunci = progres.pilihan && progres.pilihan.length > 0;
+    const perlu = (meta.peminatan || []).length > 0 && !kunci;
+    document.getElementById('pilihanBox').style.display = perlu ? 'block' : 'none';
+    if (perlu) {
+        document.getElementById('pilihanList').innerHTML = meta.peminatan.map((g, i) => {
+            const cek = g.some(m => pilihan.indexOf(m) > -1) ? 'checked' : '';
+            return `<label class="opsi"><input type="checkbox" value="${i}" ${cek}><span>${g.map(esc).join(', ')}</span></label>`;
+        }).join('');
+    }
+
+    const t = now();
+    document.getElementById('sesiList').innerHTML = sesiList.map((s, i) => {
+        const selesai = s.mapel.length && s.mapel.every(m => progres.selesai.indexOf(m) > -1);
+        const aktif = !!progres.sesi[s.sesi];
+        let badge = '', aksi = '';
+        if (selesai) badge = '<span class="badge ok">Selesai</span>';
+        else if (aktif) {
+            badge = '<span class="badge run">Sedang dikerjakan</span>';
+            aksi = `<button class="btn-next" onclick="bukaRules(${i})">Lanjutkan</button>`;
         }
+        else if (s.buka && t < s.buka) badge = `<span class="badge">Dibuka ${waktu(s.buka)}</span>`;
+        else if (s.tutup && t > s.tutup) badge = '<span class="badge bad">Ditutup</span>';
+        else {
+            badge = '<span class="badge run">Tersedia</span>';
+            aksi = `<button class="btn-next" onclick="bukaRules(${i})">Mulai</button>`;
+        }
+        return `<div class="card sesi">
+            <div><b>${esc(s.label)}</b><div class="muted small">${s.mapel.map(esc).join(', ')} · ${s.durasi} menit</div></div>
+            <div class="sesi-aksi">${badge} ${aksi}</div>
+        </div>`;
+    }).join('') || '<p class="muted center">Belum ada sesi yang tersedia untuk Anda.</p>';
+}
+
+async function simpanPilihan() {
+    const idx = [...document.querySelectorAll('#pilihanList input:checked')].map(x => +x.value);
+    if (!idx.length) return Swal.fire('Info', 'Pilih minimal satu peminatan.', 'warning');
+    pilihan = [...new Set([].concat(...idx.map(i => meta.peminatan[i])))];
+    localStorage.setItem(KEY_PIL, JSON.stringify(pilihan));
+    loading('Memperbarui sesi...');
+    const ok = await refreshSesi();
+    Swal.close();
+    if (!ok) return Swal.fire('Gagal', 'Pilihan peminatan tidak valid.', 'error');
+    renderMenu();
+}
+
+// ===== KONFIRMASI SESI =====
+function bukaRules(i) {
+    const s = sesiList[i];
+    if (!s) return;
+    pilihSesi = s;
+    document.getElementById('rNama').innerText = peserta.nama;
+    document.getElementById('rSekolah').innerText = peserta.sekolah;
+    document.getElementById('rSesi').innerText = s.label;
+    document.getElementById('rMapel').innerText = s.mapel.join(', ');
+    document.getElementById('rDurasi').innerText = s.durasi + ' menit';
+    document.getElementById('rTata').innerHTML = esc(TATA_TERTIB).replace(/\n/g, '<br>');
+    showScreen('rulesScreen');
+}
+
+async function mulaiSesiSekarang() {
+    const s = pilihSesi;
+    if (!s) return;
+    loading('Menyiapkan sesi...');
+    const r = await api('mulaiSesi', { biodata: bio(), mapel: s.sesi, mapelPilihan: pilihan });
+    if (r.status !== 'success') {
+        Swal.fire('Tidak bisa dimulai', r.message, 'error');
+        return loadMenu();
     }
-    
-    fetchAPI('ambilSoal', { username: username, password: pass, kodeUjian: kode, kelas: kelas, tokenInput: token }).then(res => {
-        if(res.status === 'ok') {
-            // MENYIMPAN INFO AKUN SEMENTARA UNTUK TRANSISI BERIKUTNYA
-            userMeta = { nim: res.nisnPeserta, nama: res.namaPeserta, kode: res.kodeUjian, sheet: res.sheetSoalName, kodeLanjutan: res.kodeLanjutan, user: username, pass: pass, kelas: kelas };
-            localStorage.setItem(SESSION_KEY, JSON.stringify({ meta: userMeta, raw: res, status: 'rules', endTime: 0 }));
-            showRules(res, kelas);
-        } else { Swal.fire('Gagal', res.message, 'error'); }
-        btn.innerText = 'MASUK'; btn.disabled = false;
-    });
-}
-
-function showRules(data) {
-    examDataRaw = data; document.getElementById('loginScreen').style.display = 'none'; document.getElementById('rulesScreen').style.display = 'flex';
-    document.getElementById('infoNama').innerText = ": " + data.namaPeserta; document.getElementById('infoNisn').innerText = ": " + data.nisnPeserta;
-    document.getElementById('infoMapel').innerText = ": " + data.judulKuis; document.getElementById('infoKode').innerText = ": " + data.kodeUjian;
-    document.getElementById('txtRules').innerHTML = (data.tataTertib || 'Tidak ada tata tertib khusus.').replace(/\n/g, '<br>');
-}
-
-function requestFullScreen() {
-    let elem = document.documentElement;
-    if (elem.requestFullscreen) { elem.requestFullscreen().catch(err=>console.log(err)); }
-    else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen().catch(err=>console.log(err)); }
-    else if (elem.msRequestFullscreen) { elem.msRequestFullscreen().catch(err=>console.log(err)); }
-}
-
-function beginExam() {
-    if(!examDataRaw) return;
-    requestFullScreen();
-    document.getElementById('rulesScreen').style.display = 'none';
-    
-    // Perbarui endTime sesi
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ meta: userMeta, raw: examDataRaw, status: 'running', endTime: new Date().getTime() + (examDataRaw.sisaDetik * 1000) }));
-    startExamUI(examDataRaw);
-}
-
-function startExamUI(data) {
-    examData = data.soal;
-    document.getElementById('ujianScreen').style.display = 'flex';
-    document.getElementById('namaUser').innerText = data.namaPeserta; document.getElementById('kodeUser').innerText = data.judulKuis;
-    const saved = localStorage.getItem(`ans_${data.nisnPeserta}_${data.kodeUjian}`);
-    if(saved) answers = JSON.parse(saved);
-
-    tabSwitchCount = parseInt(localStorage.getItem(`tab_switch_count_${data.nisnPeserta}_${data.kodeUjian}`) || '0');
-    document.getElementById('tabWarning').innerText = `Pelanggaran: ${tabSwitchCount}/3`;
-    document.getElementById('violationMobile').innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${tabSwitchCount}/3`;
-
-    renderNav(); renderSoal(0); startTimer(data.sisaDetik);
-
-    document.removeEventListener("visibilitychange", handleVisibilityChange); document.addEventListener("visibilitychange", handleVisibilityChange);
-    document.removeEventListener("fullscreenchange", handleFullscreenChange); document.addEventListener("fullscreenchange", handleFullscreenChange);
-}
-
-function triggerPelanggaran() {
-    tabSwitchCount++;
-    localStorage.setItem(`tab_switch_count_${userMeta.nim}_${userMeta.kode}`, tabSwitchCount);
-    document.getElementById('tabWarning').innerText = `Pelanggaran: ${tabSwitchCount}/3`;
-    document.getElementById('violationMobile').innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${tabSwitchCount}/3`;
-
-    if (tabSwitchCount >= 3) { confirmFinish(true); } 
-    else { Swal.fire('Peringatan!', `Dilarang keluar dari mode layar penuh / pindah tab! Pelanggaran: ${tabSwitchCount}/3.`, 'warning').then(() => { requestFullScreen(); }); }
-}
-
-function handleVisibilityChange() {
-    if(isRefreshing) return;
-    if (document.hidden && !isSubmitting && document.getElementById('ujianScreen').style.display === 'flex') { triggerPelanggaran(); }
-}
-
-function handleFullscreenChange() {
-    if (!document.fullscreenElement && !document.hidden && !isSubmitting && document.getElementById('ujianScreen').style.display === 'flex') { triggerPelanggaran(); }
-}
-
-function toggleNavModal() { const modal = document.getElementById('mobileNavModal'); modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex'; }
-
-function parseImgTags(html) {
-    if (!html) return '';
-    return html.replace(/<img\s+id=([a-zA-Z0-9_-]+)>/g, (match, id) => {
-        return `<img src="https://drive.google.com/thumbnail?id=${id}&sz=w800">`;
-    });
-}
-
-function renderSoal(idx) {
-    currIdx = idx;
-    const q = examData[idx]; const div = document.getElementById('soalContainer');
-    
-    let h = `<div class="nomor-soal"><span>Soal No. ${idx + 1}</span> <span>${q.tipe}</span></div><div class="teks-soal">${parseImgTags(q.soal)}</div>`;
-
-    if (q.tipe === 'JODOHKAN') {
-        h += `<div class="jodoh-container" id="jodohArea_${q.id}"><svg class="jodoh-svg" id="svg_${q.id}"></svg><div class="jodoh-col" id="colLeft_${q.id}"></div><div class="jodoh-col" id="colRight_${q.id}"></div></div><div style="text-align:center; font-size:0.8rem; color:var(--secondary); margin-top:10px;">Klik butir Kiri lalu klik butir Kanan untuk menghubungkan.</div>`;
-        setTimeout(() => initJodohkan(q), 50);
-    } else if(q.tipe === 'PGS') {
-        h += `<div class="opsi-group">`;
-        q.opsi.forEach((opt, i) => {
-            if(opt) {
-                const k = String.fromCharCode(65+i); const chk = (answers[q.id] === k) ? 'checked' : '';
-                h += `<label class="opsi-item"><input type="radio" name="g_${idx}" ${chk} onchange="saveAns('${q.id}','${k}')"> <div style="display:flex; width:100%;"><b style="margin-right:10px; margin-top:2px;">${k}.</b> <div class="opsi-content">${parseImgTags(opt)}</div></div></label>`;
-            }
-        });
-        h += `</div>`;
-    } else if(q.tipe === 'MCMA') {
-        const curr = answers[q.id] || []; h += `<div class="opsi-group">`;
-        q.opsi.forEach((opt, i) => {
-            if(opt) {
-                const k = String.fromCharCode(65+i); const chk = curr.includes(k) ? 'checked' : '';
-                h += `<label class="opsi-item"><input type="checkbox" ${chk} onchange="saveMcma('${q.id}','${k}')"> <div style="display:flex; width:100%;"><b style="margin-right:10px; margin-top:2px;">${k}.</b> <div class="opsi-content">${parseImgTags(opt)}</div></div></label>`;
-            }
-        });
-        h += `</div>`;
-    } else if(q.tipe === 'BENAR SALAH') {
-        const curr = answers[q.id] || {}; h += `<div class="opsi-group">`;
-        q.opsi.forEach((opt, i) => {
-            if(opt) {
-                const k = String.fromCharCode(65+i); const val = curr[k] || '';
-                const stB = val==='Benar'?'background:var(--success);color:white':''; const stS = val==='Salah'?'background:var(--danger);color:white':'';
-                h += `<div style="display:flex; justify-content:space-between; padding:10px; border:1px solid var(--border); border-radius:8px; align-items:center;"><div class="opsi-content">${parseImgTags(opt)}</div><div style="min-width: 120px; text-align:right;"><button style="border:1px solid var(--border); border-radius:4px; padding:4px 8px; ${stB}" onclick="saveBs('${q.id}','${k}','Benar')">Benar</button> <button style="border:1px solid var(--border); border-radius:4px; padding:4px 8px; ${stS}" onclick="saveBs('${q.id}','${k}','Salah')">Salah</button></div></div>`;
-            }
-        });
-        h += `</div>`;
-    } else if (q.tipe === 'URAIAN') {
-        const val = answers[q.id] || ''; let txtVal = ''; let imgSrc = '';
-        if(typeof val === 'string') txtVal = val; else if(typeof val === 'object' && val.type === 'image') imgSrc = val.data;
-        h += `<div class="form-group mb-3"><label style="font-weight:bold;display:block;margin-bottom:5px">Jawaban Teks:</label><textarea class="form-control" style="width:100%;min-height:100px;border-radius:8px;padding:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);" placeholder="Tulis jawaban di sini..." onchange="saveAns('${q.id}', this.value)">${txtVal}</textarea></div><div class="upload-area"><p style="margin:0 0 10px; font-weight:bold;">Atau Upload Foto Jawaban:</p><input type="file" accept="image/*" onchange="compressAndSave(this, '${q.id}')"><div class="preview-box" style="display:${imgSrc?'block':'none'}"><img id="prev_${q.id}" src="${imgSrc}"><br><button onclick="clearUpload('${q.id}')" style="margin-top:5px;background:var(--danger);color:white;border:none;border-radius:4px;padding:4px 8px;font-size:0.8rem;cursor:pointer">Hapus Gambar</button></div></div>`;
-    } else if (q.tipe === 'UPLOAD') {
-        const val = answers[q.id] || ''; let imgSrc = (typeof val === 'object' && val.type === 'image') ? val.data : '';
-        h += `<div class="upload-area"><p style="margin:0 0 10px; font-weight:bold;">Upload File/Foto Tugas:</p><input type="file" accept="image/*" onchange="compressAndSave(this, '${q.id}')"><div class="preview-box" style="display:${imgSrc?'block':'none'}"><img id="prev_${q.id}" src="${imgSrc}"></div></div>`;
-    } else if (q.tipe === 'JAWABAN SINGKAT' || q.tipe === 'ISIAN SINGKAT') {
-        const val = answers[q.id] || '';
-        h += `<div class="form-group"><label style="font-weight:bold;margin-bottom:5px;display:block">Jawaban Anda:</label><input type="text" class="form-control" value="${val}" placeholder="Ketikan jawaban singkat..." onchange="saveAns('${q.id}', this.value)" style="background:var(--bg);color:var(--text);"></div>`;
+    offsetMs = r.serverNow - Date.now();
+    if (r.selesai || r.auto) {
+        Swal.fire('Info', r.auto ? 'Waktu sesi ini sudah habis dan jawaban Anda sudah dikirim otomatis.' : 'Sesi ini sudah selesai.', 'info');
+        return loadMenu();
     }
-
-    div.innerHTML = h;
-    document.getElementById('btnPrev').disabled = (idx === 0);
-    document.getElementById('btnNext').style.display = (idx === examData.length - 1) ? 'none' : 'block';
-    document.getElementById('btnFinish').style.display = (idx === examData.length - 1) ? 'block' : 'none';
-    updateNavActive();
+    const q = await api('getSoal', { mapel: s.sesi, mapelPilihan: pilihan });
+    if (q.status !== 'success') {
+        Swal.fire('Gagal', q.message, 'error');
+        return loadMenu();
+    }
+    const lokal = JSON.parse(localStorage.getItem(kunciAns(s.sesi)) || '{}');
+    const srv = r.jawaban || {};
+    cur = {
+        sesi: s.sesi, label: s.label, soal: q.soal, mapel: q.mapel,
+        answers: Object.keys(srv).length ? srv : lokal,
+        batas: r.batas, idx: 0, sending: false,
+        batasPindah: meta.batasPindahTab || 0
+    };
+    tabCount = r.tab || 0;
+    Swal.close();
+    requestFullscreen();
+    showScreen('ujianScreen');
+    startExam();
 }
 
-function initJodohkan(q) {
-    const colLeft = document.getElementById(`colLeft_${q.id}`), colRight = document.getElementById(`colRight_${q.id}`);
-    if(!colLeft || !colRight) return;
-    let leftItems = [], rightItems = [];
-
-    q.opsi.forEach((opt, i) => {
-        if(!opt) return;
-        let cleanOpt = opt.replace(/<p[^>]*>/gi, '').replace(/<\/p>/gi, ''); 
-        const parts = cleanOpt.split('||'); const id = String.fromCharCode(65+i);
-        if(parts[0] && parts[0].trim() !== '') leftItems.push({ id: id, text: parts[0].trim() });
-        if(parts.length > 1 && parts[1] && parts[1].trim() !== '') rightItems.push({ id: id, text: parts[1].trim() });
-    });
-    colLeft.innerHTML = leftItems.map(item => `<div class="jodoh-item jodoh-item-left" id="L_${q.id}_${item.id}" onclick="clickJodoh('${q.id}', '${item.id}', 'L')"><div class="opsi-content">${item.text}</div><div class="jodoh-dot"></div></div>`).join('');
-    let seed = q.id.length; let shuffledRight = [...rightItems].sort(() => (seed++ % 2) - 0.5);
-    colRight.innerHTML = shuffledRight.map(item => `<div class="jodoh-item jodoh-item-right" id="R_${q.id}_${item.id}" onclick="clickJodoh('${q.id}', '${item.id}', 'R')"><div class="jodoh-dot"></div><div class="opsi-content">${item.text}</div></div>`).join('');
-
-    drawJodohLines(q.id); window.removeEventListener('resize', window.redrawJodoh); window.redrawJodoh = () => drawJodohLines(q.id); window.addEventListener('resize', window.redrawJodoh);
+// ===== UJIAN =====
+function requestFullscreen() {
+    const el = document.documentElement;
+    const f = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if (f) try { f.call(el).catch(() => {}); } catch (e) {}
+}
+function exitFullscreen() {
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {});
 }
 
-function clickJodoh(qId, itemId, side) {
-    if(side === 'L') {
-        const currentAns = getJodohAns(qId); const exists = currentAns.find(p => p.startsWith(itemId + ':'));
-        if(exists) { saveJodohAns(qId, currentAns.filter(p => !p.startsWith(itemId + ':'))); selectedLeftId = null; }
-        else selectedLeftId = itemId;
+function startExam() {
+    document.getElementById('uNama').innerText = peserta.nama;
+    document.getElementById('uSesi').innerText = cur.label;
+    updateTabWarn();
+    renderSoal(0);
+    tick();
+    timerId = setInterval(tick, 1000);
+    saveId = setInterval(autosave, 15000);
+    document.addEventListener('visibilitychange', onVis);
+    document.addEventListener('fullscreenchange', onFs);
+}
+
+function stopTimers() {
+    clearInterval(timerId); clearInterval(saveId);
+    timerId = saveId = null;
+    document.removeEventListener('visibilitychange', onVis);
+    document.removeEventListener('fullscreenchange', onFs);
+}
+
+function tick() {
+    if (!cur) return;
+    const sisa = Math.floor((cur.batas - now()) / 1000);
+    document.getElementById('timer').innerText = fmtDetik(Math.max(sisa, 0));
+    if (sisa <= 0 && !cur.sending) kirimSesi(true, 'Waktu habis');
+}
+
+function updateTabWarn() {
+    document.getElementById('tabWarn').innerText = 'Pelanggaran: ' + tabCount + (cur.batasPindah ? '/' + cur.batasPindah : '');
+}
+
+function onVis() { if (document.hidden && cur && !cur.sending) pelanggaran(); }
+function onFs() { if (!document.fullscreenElement && !document.hidden && cur && !cur.sending) pelanggaran(); }
+
+function pelanggaran() {
+    tabCount++;
+    updateTabWarn();
+    dirty = true;
+    saveLocal();
+    if (cur.batasPindah > 0 && tabCount >= cur.batasPindah) return kirimSesi(true, 'Batas pelanggaran tercapai');
+    Swal.fire('Peringatan!', `Dilarang keluar dari layar penuh / pindah tab. Pelanggaran: ${tabCount}`, 'warning').then(requestFullscreen);
+}
+
+function renderSoal(i) {
+    cur.idx = i;
+    const q = cur.soal[i];
+    if (!q) return;
+    const a = cur.answers[q.id];
+    const opsi = Object.keys(q.options || {}).filter(k => String(q.options[k] || '').trim());
+    let h = `<div class="nomor"><span>Soal ${i + 1} / ${cur.soal.length}</span><span class="muted">${esc(TIPE[q.type] || q.type)}</span></div>`;
+    h += `<div class="teks">${parseImg(q.text)}</div>`;
+
+    if (q.type === 'PG' || q.type === 'TKP') {
+        h += '<div class="opsi-group">' + opsi.map(k =>
+            `<label class="opsi"><input type="radio" name="jw" ${a === k ? 'checked' : ''} onchange="setAns(${i},'${k}')"><span><b>${k}.</b> ${parseImg(q.options[k])}</span></label>`
+        ).join('') + '</div>';
+    } else if (q.type === 'MCMA') {
+        const arr = Array.isArray(a) ? a : [];
+        h += '<div class="opsi-group">' + opsi.map(k =>
+            `<label class="opsi"><input type="checkbox" ${arr.indexOf(k) > -1 ? 'checked' : ''} onchange="setMcma(${i},'${k}')"><span><b>${k}.</b> ${parseImg(q.options[k])}</span></label>`
+        ).join('') + '</div>';
+    } else if (q.type === 'BS') {
+        const obj = (a && typeof a === 'object' && !Array.isArray(a)) ? a : {};
+        const l1 = q.label1 || 'Benar', l2 = q.label2 || 'Salah';
+        h += '<div class="opsi-group">' + opsi.map(k =>
+            `<div class="bs-row"><div><b>${k}.</b> ${parseImg(q.options[k])}</div>
+             <div class="bs-btn"><button class="${obj[k] === 'B' ? 'on-ok' : ''}" onclick="setBs(${i},'${k}','B')">${esc(l1)}</button><button class="${obj[k] === 'S' ? 'on-bad' : ''}" onclick="setBs(${i},'${k}','S')">${esc(l2)}</button></div></div>`
+        ).join('') + '</div>';
+    } else if (q.type === 'URAIAN') {
+        h += `<textarea class="fc area" oninput="setAns(${i}, this.value)" placeholder="Tulis jawaban di sini...">${esc(typeof a === 'string' ? a : '')}</textarea>`;
     } else {
-        if(selectedLeftId) {
-            let currentAns = getJodohAns(qId);
-            currentAns = currentAns.filter(p => p.split(':')[1] !== itemId); currentAns.push(`${selectedLeftId}:${itemId}`); saveJodohAns(qId, currentAns); selectedLeftId = null;
-        }
+        h += `<input class="fc" value="${esc(typeof a === 'string' ? a : '')}" oninput="setAns(${i}, this.value)" placeholder="Ketik jawaban singkat...">`;
     }
-    drawJodohLines(qId);
+
+    document.getElementById('soalBox').innerHTML = h;
+    document.getElementById('btnPrev').disabled = i === 0;
+    document.getElementById('btnNext').disabled = i === cur.soal.length - 1;
+    renderNav();
 }
-
-function getJodohAns(qId) { return Array.isArray(answers[qId]) ? answers[qId] : []; }
-function saveJodohAns(qId, arr) { answers[qId] = arr; persist(); }
-
-function drawJodohLines(qId) {
-    const svg = document.getElementById(`svg_${qId}`), container = document.getElementById(`jodohArea_${qId}`);
-    if(!svg || !container) return;
-    const ans = getJodohAns(qId), cRect = container.getBoundingClientRect();
-    document.querySelectorAll(`#jodohArea_${qId} .jodoh-item`).forEach(el => el.classList.remove('selected', 'matched'));
-    if(selectedLeftId) { const el = document.getElementById(`L_${qId}_${selectedLeftId}`); if(el) el.classList.add('selected'); }
-    let linesHTML = '';
-    ans.forEach(pair => {
-        const [lId, rId] = pair.split(':'); const elL = document.getElementById(`L_${qId}_${lId}`), elR = document.getElementById(`R_${qId}_${rId}`);
-        if(elL && elR) {
-            elL.classList.add('matched'); elR.classList.add('matched');
-            const rL = elL.getBoundingClientRect(), rR = elR.getBoundingClientRect();
-            linesHTML += `<line x1="${rL.right - cRect.left - 6}" y1="${rL.top + rL.height/2 - cRect.top}" x2="${rR.left - cRect.left + 6}" y2="${rR.top + rR.height/2 - cRect.top}" />`;
-        }
-    });
-    svg.innerHTML = linesHTML;
-}
-
-function saveAns(id, v) { answers[id] = v; persist(); }
-function clearUpload(id) { delete answers[id]; persist(); renderSoal(currIdx); }
-function saveMcma(id, k) { let a = answers[id] || []; if(a.includes(k)) a=a.filter(x=>x!==k); else a.push(k); answers[id] = a; persist(); }
-function saveBs(id, k, v) { let o = answers[id] || {}; o[k] = v; answers[id] = o; persist(); renderSoal(currIdx); }
-
-function compressAndSave(input, id) {
-    if(input.files && input.files[0]) {
-        const file = input.files[0], reader = new FileReader();
-        reader.onload = function(event) {
-            const img = new Image(); img.src = event.target.result;
-            img.onload = function() {
-                const canvas = document.createElement('canvas'), ctx = canvas.getContext('2d'), MAX_WIDTH = 800, scale = MAX_WIDTH / img.width;
-                canvas.width = MAX_WIDTH; canvas.height = img.height * scale; ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-                answers[id] = { type: 'image', data: dataUrl }; persist();
-                const pImg = document.getElementById(`prev_${id}`); if(pImg) { pImg.src = dataUrl; pImg.parentElement.style.display='block'; }
-            }
-        }
-        reader.readAsDataURL(file);
-    }
-}
-
-function persist() { localStorage.setItem(`ans_${userMeta.nim}_${userMeta.kode}`, JSON.stringify(answers)); renderNav(); }
 
 function renderNav() {
-    const desktopGrid = document.getElementById('navGrid'), mobileGrid = document.getElementById('navGridMobile');
-    desktopGrid.innerHTML = ''; mobileGrid.innerHTML = '';
-    examData.forEach((q, i) => {
-        const d1 = createNavButton(q, i); desktopGrid.appendChild(d1);
-        const d2 = createNavButton(q, i); d2.addEventListener('click', () => { document.getElementById('mobileNavModal').style.display = 'none'; }); mobileGrid.appendChild(d2);
-    });
+    document.getElementById('navGrid').innerHTML = cur.soal.map((q, i) =>
+        `<div class="nav-btn ${i === cur.idx ? 'active' : ''} ${terisi(cur.answers[q.id]) ? 'filled' : ''}" onclick="renderSoal(${i})">${i + 1}</div>`
+    ).join('');
 }
 
-function createNavButton(q, i) {
-    const d = document.createElement('div'); 
-    d.className = 'nav-btn'; 
-    d.innerText = i + 1; 
-    d.dataset.index = i; 
-    
-    const ans = answers[q.id]; let fill = false;
-    if(ans) {
-        if(Array.isArray(ans)) fill = ans.length > 0;
-        else if(typeof ans === 'object' && ans.type === 'image') fill = true;
-        else if(typeof ans === 'object' && Object.keys(ans).length > 0) fill = true;
-        else if(ans && typeof ans !== 'object') fill = true;
+function geser(d) {
+    const n = cur.idx + d;
+    if (n >= 0 && n < cur.soal.length) renderSoal(n);
+}
+
+function setAns(i, v) {
+    const id = cur.soal[i].id;
+    if (!terisi(v)) delete cur.answers[id];
+    else cur.answers[id] = v;
+    changed();
+}
+function setMcma(i, k) {
+    const id = cur.soal[i].id;
+    let a = Array.isArray(cur.answers[id]) ? cur.answers[id].slice() : [];
+    a = a.indexOf(k) > -1 ? a.filter(x => x !== k) : a.concat([k]);
+    setAns(i, a);
+}
+function setBs(i, k, v) {
+    const id = cur.soal[i].id;
+    const obj = Object.assign({}, cur.answers[id] || {});
+    obj[k] = v;
+    setAns(i, obj);
+    renderSoal(i);
+}
+function changed() {
+    dirty = true;
+    saveLocal();
+    renderNav();
+}
+function saveLocal() {
+    if (cur) localStorage.setItem(kunciAns(cur.sesi), JSON.stringify(cur.answers));
+}
+
+async function autosave() {
+    if (!cur || !dirty || cur.sending) return;
+    dirty = false;
+    const r = await api('simpanJawaban', { biodata: bio(), mapel: cur.sesi, answers: cur.answers, tab: tabCount });
+    if (r.status !== 'success') { dirty = true; return; }
+    if (r.sesi === 'habis') return kirimSesi(true, 'Waktu habis');
+    if (r.sesi === 'selesai' || r.sesi === 'reset') {
+        stopTimers();
+        cur = null;
+        exitFullscreen();
+        Swal.fire('Info', 'Sesi ini sudah ditutup atau diulang oleh pengawas.', 'info').then(loadMenu);
     }
-    if(fill) d.classList.add('filled');
-    if(i === currIdx) d.classList.add('active'); 
-    d.onclick = () => renderSoal(i); 
-    return d;
 }
 
-function updateNavActive() { 
-    document.querySelectorAll('.nav-btn').forEach((b) => { 
-        b.classList.remove('active'); 
-        if(parseInt(b.dataset.index) === currIdx) { 
-            b.classList.add('active'); 
-        } 
-    }); 
-}
-
-function move(d) { const n = currIdx + d; if(n >= 0 && n < examData.length) renderSoal(n); }
-
-function startTimer(sec) {
-    initialTime = sec; remainingTime = sec; const displayDesktop = document.getElementById('timer'), displayMobile = document.getElementById('timerMobile');
-    timerInterval = setInterval(() => {
-        remainingTime--; const h = Math.floor(remainingTime/3600), m = Math.floor((remainingTime%3600)/60), s = remainingTime%60; const text = `<i class="fas fa-clock"></i> ${h<10?'0':''}${h}:${m<10?'0':''}${m}:${s<10?'0':''}${s}`;
-        displayDesktop.innerHTML = `${h<10?'0':''}${h}:${m<10?'0':''}${m}:${s<10?'0':''}${s}`; displayMobile.innerHTML = text;
-        if(remainingTime <= 0) submitExam(true);
-    }, 1000);
-}
-
-function confirmFinish(isViolation = false) {
-    let msgHtml = isViolation ? '<b style="color:var(--danger); font-size:1.1rem;">Batas pelanggaran telah tercapai.</b>' : 'Pastikan semua soal telah terjawab. Apakah Anda yakin ingin mengakhiri ujian?';
-
+function konfirmasiKirim() {
+    if (!cur) return;
+    const kosong = cur.soal.filter(q => !terisi(cur.answers[q.id])).length;
     Swal.fire({
-        title: isViolation ? 'Ujian Dihentikan!' : 'Kirim Jawaban',
-        html: msgHtml,
-        icon: isViolation ? 'warning' : 'question',
-        showCancelButton: !isViolation,
-        confirmButtonText: 'Ya, Kirim Sekarang',
-        cancelButtonText: 'Batal',
-        confirmButtonColor: '#10b981'
-    }).then((result) => { 
-        if (result.isConfirmed) submitExam(isViolation); 
-    });
+        title: 'Kirim jawaban?',
+        html: kosong ? `Masih ada <b>${kosong}</b> soal belum dijawab.<br>Yakin ingin mengirim?` : 'Yakin ingin mengirim jawaban?',
+        icon: 'question', showCancelButton: true, confirmButtonText: 'Ya, Kirim', cancelButtonText: 'Batal', confirmButtonColor: '#10b981'
+    }).then(res => { if (res.isConfirmed) kirimSesi(false, 'Dikirim siswa'); });
 }
 
-function submitExam(forced) {
-    if(isSubmitting) return; isSubmitting = true; clearInterval(timerInterval);
-    let usedSeconds = initialTime - remainingTime; if (usedSeconds < 0) usedSeconds = 0;
-    const h = Math.floor(usedSeconds/3600), m = Math.floor((usedSeconds%3600)/60), s = usedSeconds%60; const timeSpentStr = `${h<10?'0':''}${h}:${m<10?'0':''}${m}:${s<10?'0':''}${s}`;
-    let msg = forced && tabSwitchCount < 2 ? "Waktu habis." : "Mengirim data ke server...";
-    Swal.fire({ title: 'Mengirim...', text: msg, allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-
-    fetchAPI('simpanJawabanFinal', { nim: userMeta.nim, nama: userMeta.nama, kodeUjian: userMeta.kode, sheetSoalName: userMeta.sheet, jawabanObjek: answers, lamaPengerjaan: timeSpentStr }).then(res => {
-        localStorage.removeItem(`ans_${userMeta.nim}_${userMeta.kode}`); localStorage.removeItem(`tab_switch_count_${userMeta.nim}_${userMeta.kode}`); 
-        
-        if(res.status === 'ok') {
-            Swal.close();
-
-            // A. Simpan skor sub-tes yang baru selesai ke memori browser
-            let rekapNilaiSiswa = JSON.parse(localStorage.getItem('rekap_nilai_temp') || '[]');
-            rekapNilaiSiswa.push({
-                mapel: userMeta.sheet || userMeta.kode,
-                skor: (res.tampilNilai && res.skor !== null) ? res.skor : 'Disembunyikan'
-            });
-            localStorage.setItem('rekap_nilai_temp', JSON.stringify(rekapNilaiSiswa));
-
-            // B. Cek apakah ada sub-tes selanjutnya
-            if(userMeta.kodeLanjutan && userMeta.kodeLanjutan.trim() !== '') {
-                localStorage.setItem(SESSION_KEY, JSON.stringify({ meta: userMeta, status: 'transition' }));
-                document.getElementById('ujianScreen').style.display = 'none';
-                document.getElementById('nextExamName').innerText = userMeta.kodeLanjutan;
-                document.getElementById('transitionScreen').style.display = 'flex';
-            } else {
-                // C. Jika sudah mapel terakhir (tidak ada kode lanjutan)
-                localStorage.removeItem(SESSION_KEY);
-                
-                let htmlNilai = '', pesanAkhir = '';
-                if (res.tampilNilai && res.skor !== null) { 
-                    htmlNilai = `<div style="font-size:4rem; font-weight:bold; color:var(--primary); margin:10px 0;">${res.skor}</div>`; 
-                    pesanAkhir = 'Nilai sub-tes terakhir berhasil direkam.'; 
-                } else { 
-                    htmlNilai = `<div style="font-size:3rem; margin:20px 0;">🔒</div>`; 
-                    pesanAkhir = 'Jawaban tersimpan. Nilai disembunyikan.'; 
-                }
-                
-                document.getElementById('successScore').innerHTML = htmlNilai; 
-                document.getElementById('successMsg').innerText = pesanAkhir;
-                
-                // Munculkan tombol "Lihat Hasil Seluruh Sub-tes"
-                document.getElementById('btnLihatRekap').style.display = 'inline-block';
-
-                document.getElementById('successScreen').style.display = 'flex'; 
-                document.getElementById('ujianScreen').style.display = 'none';
-            }
-        } 
-        else { 
-            isSubmitting = false; 
-            Swal.fire('Gagal', res.message, 'error'); 
-        }
-    });
+async function kirimSesi(auto, alasan) {
+    if (!cur || cur.sending) return;
+    cur.sending = true;
+    stopTimers();
+    Swal.fire({ title: 'Mengirim jawaban...', text: alasan || '', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+    const kirim = () => api('submitMapel', { biodata: bio(), mapel: cur.sesi, answers: cur.answers, mapelPilihan: pilihan, auto: !!auto });
+    let r = await kirim();
+    if (r.status !== 'success' && /diproses/i.test(r.message || '')) {
+        await new Promise(res => setTimeout(res, 2000));
+        r = await kirim();
+    }
+    if (r.status !== 'success') {
+        cur.sending = false;
+        return Swal.fire({
+            title: 'Gagal mengirim', html: esc(r.message) + '<br><span class="small">Jawaban tetap tersimpan di perangkat dan server. Coba kirim lagi.</span>',
+            icon: 'error', confirmButtonText: 'Coba Lagi'
+        }).then(res => { if (res.isConfirmed) kirimSesi(auto, alasan); });
+    }
+    const label = cur.label;
+    localStorage.removeItem(kunciAns(cur.sesi));
+    cur = null;
+    exitFullscreen();
+    if (r.sudah) { Swal.close(); return loadMenu(); }
+    Swal.close();
+    tampilHasil(r, label);
 }
 
-function updateTime() {
-    const now = new Date();
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    const date = now.getDate().toString().padStart(2, '0');
-    const month = months[now.getMonth()];
-    const year = now.getFullYear(); 
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const seconds = now.getSeconds().toString().padStart(2, '0');
-    const timeString = `${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
-    document.getElementById('date_time').innerHTML = timeString;
-}
-
-setInterval(updateTime, 1000);
-updateTime();
-
-// --- FUNGSI BARU TRANSAKSI MAPEL ---
-function lanjutSubTes() {
-    Swal.fire({ title: 'Memuat Sub-tes...', text: 'Tunggu sebentar, tidak perlu login ulang.', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-    
-    // Parameter isSequential = true agar Token Mapel kedua otomatis terbypass
-    fetchAPI('ambilSoal', { username: userMeta.user, password: userMeta.pass, kodeUjian: userMeta.kodeLanjutan, kelas: userMeta.kelas, tokenInput: '', isSequential: true }).then(res => {
-        if(res.status === 'ok') {
-            Swal.close();
-            // Perbarui Meta Data User dengan info mapel baru
-            userMeta.kode = res.kodeUjian;
-            userMeta.sheet = res.sheetSoalName;
-            userMeta.kodeLanjutan = res.kodeLanjutan;
-            
-            localStorage.setItem(SESSION_KEY, JSON.stringify({ meta: userMeta, raw: res, status: 'rules', endTime: 0 }));
-            
-            // Reset status pengerjaan soal
-            answers = {}; currIdx = 0; isSubmitting = false; tabSwitchCount = 0;
-            
-            document.getElementById('transitionScreen').style.display = 'none';
-            showRules(res); // Arahkan ke Tata Tertib Mapel Baru
-        } else {
-            Swal.fire('Error', 'Mapel lanjutan bermasalah: ' + res.message, 'error');
-        }
-    });
-}
-    // Fungsi untuk membuka pop-up dan membuat tabel nilai
-function bukaModalRekap() {
-    let rekapData = JSON.parse(localStorage.getItem('rekap_nilai_temp') || '[]');
-    let htmlTabel = `<table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:0.95rem;">
-        <thead>
-            <tr style="background:var(--primary); color:white;">
-                <th style="padding:10px; border:1px solid var(--border); text-align:left;">Mata Pelajaran</th>
-                <th style="padding:10px; border:1px solid var(--border); text-align:center;">Nilai</th>
-            </tr>
-        </thead>
-        <tbody>`;
-        
-    if(rekapData.length === 0) {
-        htmlTabel += `<tr><td colspan="2" style="text-align:center; padding:15px;">Tidak ada data rekap nilai.</td></tr>`;
+function tampilHasil(r, label) {
+    let h = `<p class="muted">Sesi <b>${esc(label)}</b> telah dikirim.</p>`;
+    if (r.hasil) {
+        h += '<table class="info">' + r.hasil.perMapel.map(x =>
+            `<tr><td>${esc(x.mapel)}</td><td class="right"><b>${x.skor}</b>${x.lulus === false ? ' <span class="err small">(tidak lulus)</span>' : ''}</td></tr>`
+        ).join('');
+        const ringkas = r.hasil.jenis === 'SKD' ? `Total: <b>${r.hasil.total}</b>` : `Rata-rata: <b>${r.hasil.rataRata}</b>`;
+        h += `</table><p>${ringkas}</p>`;
+        if (r.hasil.pending) h += `<p class="small muted">${r.hasil.pending} soal uraian menunggu koreksi.</p>`;
     } else {
-        rekapData.forEach(item => {
-            htmlTabel += `<tr>
-                <td style="padding:10px; border:1px solid var(--border); font-weight:bold; color:var(--text);">${item.mapel}</td>
-                <td style="padding:10px; border:1px solid var(--border); text-align:center; font-weight:bold; color:var(--primary);">${item.skor}</td>
-            </tr>`;
-        });
+        h += '<div style="font-size:2.5rem">🔒</div><p class="muted">Nilai belum ditampilkan oleh pengelola.</p>';
     }
-    
-    htmlTabel += `</tbody></table>`;
-    document.getElementById('isiTabelRekap').innerHTML = htmlTabel;
-    document.getElementById('modalRekapNilai').style.display = 'flex';
+    if (r.lengkap) h += '<p><b>Semua sesi sudah selesai.</b></p>';
+    if (r.pembahasan && r.pembahasan.length) {
+        h += `<details style="text-align:left; margin-top:10px"><summary>Pembahasan (${r.pembahasan.length} soal)</summary>` +
+            r.pembahasan.map(p => `<p class="small"><b>No ${esc(p.id)}</b> · ${p.benar === true ? 'Benar' : p.benar === false ? 'Salah' : 'Uraian'} · Kunci: ${esc(p.kunci)}<br>${esc(p.pembahasan || '')}</p>`).join('') +
+            '</details>';
+    }
+    document.getElementById('hasilBody').innerHTML = h;
+    showScreen('hasilScreen');
 }
 
-// Fungsi untuk menutup pop-up
-function tutupModalRekap() {
-    document.getElementById('modalRekapNilai').style.display = 'none';
+// ===== CEK HASIL =====
+function bukaCekHasil() {
+    document.getElementById('cNama').value = peserta ? peserta.nama : val('inpNama');
+    document.getElementById('cWA').value = peserta ? peserta.wa.slice(-4) : '';
+    document.getElementById('cHasil').innerHTML = '';
+    document.getElementById('cekScreen').classList.add('on');
 }
-// === POIN 3 DILETAKKAN TEPAT DI BANYAK SINI ===
-const oldBackToLogin = backToLogin;
-backToLogin = function() {
-    localStorage.removeItem('rekap_nilai_temp');
-    if(document.getElementById('btnLihatRekap')) {
-        document.getElementById('btnLihatRekap').style.display = 'none';
-    }
-    if (typeof oldBackToLogin === 'function') oldBackToLogin();
-};
-    
+function tutupCek() {
+    document.getElementById('cekScreen').classList.remove('on');
+}
+async function doCekHasil() {
+    const nama = val('cNama').replace(/\s+/g, ' ').trim();
+    const wa4 = val('cWA').replace(/\D/g, '').slice(-4);
+    const out = document.getElementById('cHasil');
+    if (!nama || wa4.length < 4) { out.innerHTML = '<p class="err">Isi nama dan 4 digit terakhir nomor WA.</p>'; return; }
+    out.innerHTML = '<p class="muted">Memeriksa...</p>';
+    const r = await api('cekHasil', { nama, wa4 });
+    if (r.status !== 'success') { out.innerHTML = `<p class="err">${esc(r.message)}</p>`; return; }
+    let h = `<p><b>${esc(r.nama)}</b> · ${esc(r.sekolah)}</p>`;
+    h += '<table class="info">' + (r.skor || []).map(x => `<tr><td>${esc(x.mapel)}</td><td class="right"><b>${x.skor}</b></td></tr>`).join('') + '</table>';
+    if (r.nilai) h += `<p>Nilai: <b>${esc(r.nilai)}</b></p>`;
+    if (r.statusLulus) h += `<p>Status: <b>${esc(r.statusLulus)}</b></p>`;
+    if (r.statusKoreksi) h += `<p class="small muted">${esc(r.statusKoreksi)}</p>`;
+    out.innerHTML = h;
+}
 </script>
 </body>
 </html>
